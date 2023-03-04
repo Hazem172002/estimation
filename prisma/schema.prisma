@@ -1,0 +1,119 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id              String            @id @default(uuid())
+  admin           Boolean           @default(false)
+  Foundations     Foundations[]
+  Functionalities Functionalities[]
+  Platforms       Platforms[]
+  Estimation      Estimation[]
+}
+
+model Estimation {
+  id     String @id @default(uuid())
+  hours  Float
+  cost   Float
+  userId String
+  Users  Users  @relation(fields: [userId], references: [id])
+}
+
+model Platforms {
+  id     String @id @default(uuid())
+  userId String
+
+  featureName String
+
+  Users Users @relation(fields: [userId], references: [id])
+}
+
+model Foundations {
+  id          String        @id @default(uuid())
+  userId      String
+  platformId  String
+  LandingPage LandingPage[]
+  Settings    Settings[]
+  Help        Help[]
+  Auth        Auth[]
+  Users       Users         @relation(fields: [userId], references: [id])
+}
+
+model LandingPage {
+  id           String      @id @default(uuid())
+  foundationId String
+  featureName  String
+  Foundations  Foundations @relation(fields: [foundationId], references: [id])
+}
+
+model Settings {
+  id           String      @id @default(uuid())
+  foundationId String
+  featureName  String
+  Foundations  Foundations @relation(fields: [foundationId], references: [id])
+}
+
+model Help {
+  id           String      @id @default(uuid())
+  foundationId String
+  featureName  String
+  Foundations  Foundations @relation(fields: [foundationId], references: [id])
+}
+
+model Auth {
+  id           String      @id @default(uuid())
+  foundationId String
+  featureName  String
+  Foundations  Foundations @relation(fields: [foundationId], references: [id])
+}
+
+model Functionalities {
+  id         String @id @default(uuid())
+  userId     String
+  platformId String
+  Users      Users  @relation(fields: [userId], references: [id])
+
+  LearningManagmentSystem LearningManagmentSystem[]
+  WorkPlace               WorkPlace[]
+  ODCManagment            ODCManagment[]
+  jopHub                  jopHub[]
+}
+
+model LearningManagmentSystem {
+  id              String          @id @default(uuid())
+  featureName     String          @unique
+  functionalityId String
+  Functionalities Functionalities @relation(fields: [functionalityId], references: [id])
+}
+
+model WorkPlace {
+  id              String @id @default(uuid())
+  featureName     String @unique
+  functionalityId String
+
+  Functionalities Functionalities @relation(fields: [functionalityId], references: [id])
+}
+
+model ODCManagment {
+  id              String @id @default(uuid())
+  featureName     String @unique
+  functionalityId String
+
+  Functionalities Functionalities @relation(fields: [functionalityId], references: [id])
+}
+
+model jopHub {
+  id              String @id @default(uuid())
+  featureName     String @unique
+  functionalityId String
+
+  Functionalities Functionalities @relation(fields: [functionalityId], references: [id])
+}

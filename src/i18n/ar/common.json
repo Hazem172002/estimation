@@ -1,0 +1,21 @@
+{
+  "Web": "صفحه تعريفيه",
+
+  "LandingPage": "LandingPage , صفحه تعريفيه",
+  "Settings": "Settings , الاعدادات ",
+  "Help": "Help , المساعده",
+  "Auth": "Authentication , التوثيق",
+  "dashboard": "dashboard ,  صفحه تحكم",
+  "navigationTabs": "navigationTabs , نظام تصفح",
+  "notifications": "notifications , اشعارات",
+  "nightMode": "nightMode , نظام ليلي",
+  "learnMore": "learnMore , معلومات اخري",
+  "contactUs": "contactUs , تواصل معنا",
+  "FAQ": "FAQ , اسئله متكرره",
+  "report": "report ,  الابلاغ",
+  "learningManagmentSystem": "learningManagmentSystem , نظام اداره التعلم",
+  "workPlace": "workPlace , بيئه العمل",
+  "ODCManagment": "ODCManagment , ODC تنظيمات",
+  "jopHub": "jopHub , عروض الوظائف",
+  "complexity": "complexity , مدي التعقيد"
+}
