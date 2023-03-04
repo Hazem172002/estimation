@@ -11,6 +11,9 @@ import { PlatformService } from './platform/platform.service';
 import { EstimationController } from './estimation/estimation.controller';
 import { EstimationModule } from './estimation/estimation.module';
 import { FrontModule } from './front/front.module';
+import { ComplexityController } from './complexity/complexity.controller';
+import { ComplexityModule } from './complexity/complexity.module';
+import { ComplexityService } from './complexity/complexity.service';
 @Module({
   imports: [
     forwardRef(() =>
@@ -23,8 +26,9 @@ import { FrontModule } from './front/front.module';
     PlatformModule,
     EstimationModule,
     FrontModule,
+    ComplexityModule,
   ],
-  controllers: [PlatformController, EstimationController],
+  controllers: [PlatformController, EstimationController, ComplexityController],
   providers: [
     PrismaService,
     Complexity,
@@ -32,6 +36,7 @@ import { FrontModule } from './front/front.module';
     Hours,
     ResponseService,
     PlatformService,
+    ComplexityService,
   ],
 })
 export class AppModule {}
