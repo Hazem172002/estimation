@@ -14,6 +14,7 @@ import { FrontModule } from './front/front.module';
 import { ComplexityController } from './complexity/complexity.controller';
 import { ComplexityModule } from './complexity/complexity.module';
 import { ComplexityService } from './complexity/complexity.service';
+import { EstimationService } from './estimation/estimation.service';
 @Module({
   imports: [
     forwardRef(() =>
@@ -37,6 +38,7 @@ import { ComplexityService } from './complexity/complexity.service';
     ResponseService,
     PlatformService,
     ComplexityService,
+    EstimationService,
   ],
 })
 export class AppModule {}

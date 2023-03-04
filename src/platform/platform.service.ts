@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { Cost } from 'src/helper/service/cost.service';
+import { Hours } from 'src/helper/service/hours.service';
 import { ResponseService } from 'src/helper/service/response.service';
 import { PrismaService } from 'src/prisma.service';
 
@@ -7,6 +9,8 @@ export class PlatformService {
   constructor(
     private prisma: PrismaService,
     private responseService: ResponseService,
+    private costService: Cost,
+    private hourService: Hours,
   ) {}
   async platforms(res) {
     let lastPlatform = [];
@@ -29,6 +33,8 @@ export class PlatformService {
     return this.responseService.success(res, 'kdmsf', lastPlatform);
   }
   async addPlatform(body, res) {
+    let hours = 0;
+    let cost = 0;
     const { platform } = body;
     let filteredSystemPlatform = [];
     const systemPlatforms = await this.prisma.users.findFirst({
@@ -89,6 +95,18 @@ export class PlatformService {
       await this.prisma.platforms.createMany({
         data: filteredFeatures,
       });
+      filteredFeatures.map((e) => {
+        hours += this.hourService.getValue(e);
+        cost += this.costService.getValue(e);
+      });
+      await this.prisma.estimation.create({
+        data: {
+          userId: addUser.id,
+          hours: hours,
+          cost: cost,
+        },
+      });
+
       return this.responseService.success(res, 'platform added successfully', {
         userId: addUser.id,
       });

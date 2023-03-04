@@ -17,13 +17,21 @@ model Users {
   Functionalities Functionalities[]
   Platforms       Platforms[]
   Estimation      Estimation[]
+  Features        Features[]
+}
+
+model Features {
+  id          String @id @default(uuid())
+  featureName String
+  userId      String
+  Users       Users  @relation(fields: [userId], references: [id])
 }
 
 model Estimation {
   id     String @id @default(uuid())
   hours  Float
   cost   Float
-  userId String
+  userId String @unique
   Users  Users  @relation(fields: [userId], references: [id])
 }
 
