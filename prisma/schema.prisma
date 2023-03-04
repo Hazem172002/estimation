@@ -39,7 +39,6 @@ model Platforms {
 model Foundations {
   id          String        @id @default(uuid())
   userId      String
-  platformId  String
   LandingPage LandingPage[]
   Settings    Settings[]
   Help        Help[]
@@ -76,10 +75,9 @@ model Auth {
 }
 
 model Functionalities {
-  id         String @id @default(uuid())
-  userId     String
-  platformId String
-  Users      Users  @relation(fields: [userId], references: [id])
+  id     String @id @default(uuid())
+  userId String
+  Users  Users  @relation(fields: [userId], references: [id])
 
   LearningManagmentSystem LearningManagmentSystem[]
   WorkPlace               WorkPlace[]
